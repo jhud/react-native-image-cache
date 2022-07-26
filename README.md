@@ -1,4 +1,9 @@
-# React Native Image Cache on File System with Progressive Loading
+# React Native Image Cache on File System
+
+This is a cutdown version of the original library: the original had animated thumbnails and loading placeholders which flickered and did not fit in with an existing project. Also, the inside image could not be styled.
+
+I recommend using the original library and all its nice thumbnailing and progressive loading features instead of this fork, unless you are retrofitting the library into an existing project which already handles thumbnailing and loading.
+
 
 [![npm version](https://img.shields.io/npm/v/@georstat/react-native-image-cache.svg?style=for-the-badge)](https://www.npmjs.com/package/@georstat/react-native-image-cache)
 [![npm downloads](https://img.shields.io/npm/dm/@georstat/react-native-image-cache.svg?style=for-the-badge)](https://www.npmjs.com/package/@georstat/react-native-image-cache)
