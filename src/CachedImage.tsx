@@ -11,6 +11,7 @@ import {
   Platform,
   StyleSheet,
   View,
+  Image,
 } from 'react-native';
 import Animated, {
   useAnimatedStyle,
@@ -67,10 +68,6 @@ const CachedImage = (props: IProps & typeof defaultProps) => {
   const animatedThumbnailImage = useSharedValue(0);
 
   const animatedLoadingImage = useSharedValue(1);
-
-  const imageSourceStyle = useAnimatedStyle(() => {
-    return { opacity: animatedImage.value };
-  });
 
   const thumbnailSourceStyle = useAnimatedStyle(() => {
     return { opacity: animatedThumbnailImage.value };
@@ -185,44 +182,7 @@ const CachedImage = (props: IProps & typeof defaultProps) => {
   }, [uri, error]);
 
   return (
-    <View style={[styles.container, style]} testID={testID}>
-      {!isImageReady &&
-        (LoadingImageComponent ? (
-          <AnimatedView
-            style={[styles.loadingImageStyle, animatedLoadingImageStyle]}
-          >
-            <LoadingImageComponent />
-          </AnimatedView>
-        ) : (
-          <View style={[styles.loadingImageStyle]}>
-            <AnimatedImage
-              accessibilityHint={accessibilityHintLoadingImage}
-              accessibilityLabel={accessibilityLabelLoadingImage}
-              accessibilityRole={accessibilityRoleLoadingSource || 'image'}
-              accessible
-              resizeMode={resizeMode || 'contain'}
-              style={[animatedLoadingImageStyle, loadingImageStyle]}
-              // @ts-ignore
-              source={loadingSource}
-            />
-          </View>
-        ))}
-      {thumbnailSource && (
-        <AnimatedImage
-          accessibilityHint={accessibilityHintThumbnail}
-          accessibilityLabel={accessibilityLabelThumbnail}
-          accessibilityRole={accessibilityRoleThumbnail || 'image'}
-          accessible
-          blurRadius={blurRadius || CacheManager.config.blurRadius}
-          onLoad={onThumbnailLoad}
-          resizeMode={resizeMode || 'contain'}
-          source={{ uri: thumbnailSource }}
-          style={[style, thumbnailSourceStyle]}
-        />
-      )}
-      {imageSource && (
-        <AnimatedImage
-          {...rest}
+        <Image
           accessibilityHint={accessibilityHint}
           accessibilityLabel={accessibilityLabel}
           accessibilityRole={accessibilityRole || 'image'}
@@ -234,10 +194,8 @@ const CachedImage = (props: IProps & typeof defaultProps) => {
           // @ts-ignore
           source={imageSource}
           // @ts-ignore
-          style={[styles.imageStyle, imageSourceStyle]}
+          style={[style]}
         />
-      )}
-    </View>
   );
 };
 
